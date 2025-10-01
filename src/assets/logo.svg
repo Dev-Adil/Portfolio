@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" 
+     viewBox="130 125 240 240" 
+     width="240" 
+     height="240" 
+     preserveAspectRatio="xMidYMid meet">
+
+  <defs>
+    <!-- Same gradient used in the original Q -->
+    <linearGradient id="linear-gradient" x1="201.04" y1="319.45" x2="344.74" y2="182.69" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6920ff"/>
+      <stop offset="1" stop-color="#e584ff"/>
+    </linearGradient>
+  </defs>
+
+  <text 
+    x="250" 
+    y="270" 
+    text-anchor="middle" 
+    dominant-baseline="middle" 
+    font-family="sans-serif" 
+    font-weight="bold" 
+    font-size="270" 
+    fill="url(#linear-gradient)">
+    A
+  </text>
+
+</svg>
