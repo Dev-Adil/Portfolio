@@ -27,12 +27,7 @@ import threejs from "./tech/threejs.svg";
 import caci from "./company/caci.png";
 import gdit from "./company/gdit.png";
 import boozallen from "./company/boozallen.png";
-import ecs from "./company/ecs.png";
 import xpectsolutions from "./company/xpectsolutions.png";
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
@@ -65,13 +60,8 @@ export {
   caci,
   gdit,
   boozallen,
-  ecs,
   xpectsolutions,
-  meta,
-  shopify,
-  starbucks,
   swift,
-  tesla,
   carrent,
   jobit,
   tripguide,

@@ -20,12 +20,7 @@ import {
   caci,
   gdit,
   boozallen,
-  ecs,
   xpectsolutions,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
   threejs,
   swift,
 } from "../assets";

@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -8,7 +8,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 
 type ServiceCardProps = { index: number; title: string; icon: string };
-const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
+const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => {
   return (
     <Tilt className="sm:w-[250px] w-5/6" options={{ max: 45, scale: 1, speed: 450 }}>
       <motion.div
@@ -26,7 +26,9 @@ const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
       </motion.div>
     </Tilt>
   );
-};
+});
+
+ServiceCard.displayName = 'ServiceCard';
 
 const About = () => {
   return (

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,7 +13,7 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 type ExperienceCardProps = { experience: import("../constants").Experience };
-const ExperienceCard = ({ experience }: ExperienceCardProps) => (
+const ExperienceCard = memo(({ experience }: ExperienceCardProps) => (
   <VerticalTimelineElement
     contentStyle={{ background: "#1d1836", color: "#fff" }}
     contentArrowStyle={{ borderRight: "7px solid  #232631" }}
@@ -50,7 +51,9 @@ const ExperienceCard = ({ experience }: ExperienceCardProps) => (
       ))}
     </ul>
   </VerticalTimelineElement>
-);
+));
+
+ExperienceCard.displayName = 'ExperienceCard';
 
 const Experience = () => {
   return (
