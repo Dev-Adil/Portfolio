@@ -12,6 +12,8 @@ import {
   tailwind,
   nodejs,
   mongodb,
+  make,
+  n8n,
   git,
   figma,
   docker,
@@ -19,6 +21,7 @@ import {
   gdit,
   boozallen,
   ecs,
+  xpectsolutions,
   meta,
   starbucks,
   tesla,
@@ -36,9 +39,9 @@ export const navLinks: ReadonlyArray<NavLink> = [
 
 export type Service = { title: string; icon: string };
 export const services: ReadonlyArray<Service> = [
-  { title: "Web Developer", icon: web },
-  { title: "Mobile Developer", icon: mobile },
-  { title: "AI Consultant", icon: backend },
+  { title: "Software Developer", icon: web },
+  { title: "UI/UX Designer", icon: mobile },
+  { title: "AI Architect", icon: backend },
 ];
 
 export type Technology = { name: string; icon: string };
@@ -53,6 +56,8 @@ export const technologies: ReadonlyArray<Technology> = [
   { name: "Swift", icon: swift },
   { name: "Git", icon: git },
   { name: "Docker", icon: docker },
+  { name: "N8N", icon: n8n },
+  { name: "Make", icon: make },
 ];
 
 export type Experience = {
@@ -65,27 +70,16 @@ export type Experience = {
 };
 export const experiences: ReadonlyArray<Experience> = [
   {
-    title: "Web Developer",
-    company_name: "CACI",
-    icon: caci,
-    iconBg: "#F5F5F5",
-    date: "March 2016 - July 2017",
+    title: "Senior Software Engineer",
+    company_name: "Xpect Solutions",
+    icon: xpectsolutions,
+    iconBg: "#01193d",
+    date: "Jan 2022 - Present",
     points: [
-      "Developed SharePoint sites using HTML, CSS, and JavaScript.",
-      "Migrated SharePoint site collections from 2010 to 2013.",
-      "Established SOPs to streamline post-migration maintenance.",
-    ],
-  },
-  {
-    title: "Software Engineer",
-    company_name: "General Dynamics Information Technology",
-    icon: gdit,
-    iconBg: "#F5F5F5",
-    date: "July 2017 - Oct 2019",
-    points: [
-      "Built websites featuring automated workflows and custom designs.",
-      "Managed SharePoint server farms and backend services.",
-      "Collaborated with clients to deliver tailored solutions.",
+      "Developed cross-platform mobile applications using React Native and Swift for iOS/Android with responsive UI components and Redux state management.",
+      "Engineered 200+ dynamic web forms using Plone and Zope with form validation, error handling, and WCAG 2.1 accessibility compliance.",
+      "Led full SDLC activities from requirements through production deployment, implementing CI/CD pipelines and Docker containerization.",
+      "Mentored junior developers through code reviews and guided programming sessions while establishing team coding standards and best practices.",
     ],
   },
   {
@@ -95,23 +89,36 @@ export const experiences: ReadonlyArray<Experience> = [
     iconBg: "#383E56",
     date: "Oct 2019 - Dec 2021",
     points: [
-      ".NET applications integrated with SQL databases for DoD contracts.",
-      "Administered SQL databases using SQL Server Management Studio.",
-      "Adopted Agile methodologies to improve team efficiency.",
-      "Conducted feasibility analyses and assessed application performance.",
+      "Developed enterprise-scale .NET applications for DoD clients, implementing RESTful APIs and microservices architecture for critical operations.",
+      "Designed and maintained SQL Server databases, writing optimized queries, stored procedures, and indexing strategies for performance.",
+      "Built automated data integration pipelines connecting multiple systems via APIs, reducing manual data entry and improving accuracy.",
+      "Participated in Agile ceremonies using JIRA/Confluence and conducted technical analysis to provide architecture improvement recommendations.",
     ],
   },
   {
-    title: "Application Solutions Developer",
-    company_name: "ECS Federal",
-    icon: ecs,
+    title: "Software Engineer",
+    company_name: "General Dynamics Information Technology",
+    icon: gdit,
     iconBg: "#F5F5F5",
-    date: "Jan 2022 - Present",
+    date: "July 2017 - Oct 2019",
     points: [
-      "Built cross-platform mobile applications for DOJ contracts.",
-      "Created responsive websites and dynamic web forms.",
-      "Advised clients on optimal technology solutions.",
-      "Engaged in all SDLC phases, from requirements to deployment.",
+      "Built custom SharePoint sites with JavaScript-based automation workflows and tailored UI designs to meet federal agency requirements.",
+      "Developed server-side workflows using Nintex 2010 for document routing, approval processes, and automated notifications.",
+      "Resolved SharePoint incident tickets agency-wide, troubleshooting issues, implementing fixes, and documenting solutions.",
+      "Worked with cross-functional teams including QA testers and developers to deliver client projects through full testing cycles.",
+    ],
+  },
+  {
+    title: "Web Developer",
+    company_name: "CACI",
+    icon: caci,
+    iconBg: "#F5F5F5",
+    date: "March 2016 - July 2017",
+    points: [
+      "Assisted in migrating SharePoint site collections from 2010 to 2013, performing testing and validation to ensure data integrity.",
+      "Debugged and refined custom SharePoint master pages using SharePoint Designer, fixing CSS and layout issues for visual consistency.",
+      "Utilized PowerShell scripts to transition sites between development and production environments following deployment procedures.",
+      "Developed responsive web pages using HTML5, CSS3, JavaScript, and jQuery with AJAX and JSON for dynamic content loading.",
     ],
   },
 ];

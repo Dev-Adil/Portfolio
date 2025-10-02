@@ -9,6 +9,7 @@ const Tech = lazy(() => import("./components/Tech"));
 // const Feedbacks = lazy(() => import("./components/Feedbacks"));
 const Contact = lazy(() => import("./components/Contact"));
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
+const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
   const patterns = [
@@ -34,6 +35,7 @@ const App = () => {
           <Contact />
           <StarsCanvas />
         </div>
+        <Footer />
       </Suspense>
     </div>
   );

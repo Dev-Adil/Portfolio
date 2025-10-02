@@ -40,12 +40,14 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        As a full-stack developer specializing in React, React-Native, and Java;
-        I create responsive, user-friendly, and visually appealing web & mobile
-        apps designed to deliver an exceptional user experience. Beyond
-        development, I'm dedicated to leveraging AI-driven solutions to
-        streamline processes, enhance productivity, and help my clients achieve
-        their business goals.
+        Senior Software Engineer with 9 years of proven expertise leading high-impact web and 
+        mobile application development at enterprise scale. Specialist in modern front-end 
+        frameworks, cloud infrastructure, and cross-platform technologies. Adept at integrating 
+        AI-driven solutions to streamline development workflows, accelerate product delivery, 
+        and unlock data-driven insights. Successfully delivered 20+ complex applications, 
+        optimized Agile workflows, and architected solutions that significantly boosted user 
+        satisfaction and business performance. Ready to drive technical innovation and AI-powered 
+        engineering excellence at a top-tier technology leader.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10 justify-center">

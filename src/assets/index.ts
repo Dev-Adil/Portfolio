@@ -13,7 +13,9 @@ import figma from "./tech/figma.png";
 import git from "./tech/git.png";
 import html from "./tech/html.png";
 import javascript from "./tech/javascript.png";
+import make from "./tech/make.png";
 import mongodb from "./tech/mongodb.png";
+import n8n from "./tech/n8n.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
@@ -26,6 +28,7 @@ import caci from "./company/caci.png";
 import gdit from "./company/gdit.png";
 import boozallen from "./company/boozallen.png";
 import ecs from "./company/ecs.png";
+import xpectsolutions from "./company/xpectsolutions.png";
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
@@ -51,6 +54,8 @@ export {
   html,
   javascript,
   mongodb,
+  make,
+  n8n,
   nodejs,
   reactjs,
   redux,
@@ -61,6 +66,7 @@ export {
   gdit,
   boozallen,
   ecs,
+  xpectsolutions,
   meta,
   shopify,
   starbucks,
