@@ -2,8 +2,6 @@ import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
-import { rand } from "three/webgpu";
-import { r } from "maath/dist/misc-19a3ec46.esm";
 
 type StarsProps = Record<string, unknown>;
 const Stars = (props: StarsProps) => {
