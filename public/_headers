@@ -1,0 +1,53 @@
+# Headers for Netlify/Vercel deployments
+
+/*
+  # Security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+
+/assets/*
+  # Cache static assets for 1 year
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.js
+  # Cache JavaScript files
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.css
+  # Cache CSS files
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  # Cache fonts
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.gltf
+  # Cache 3D models
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/*.bin
+  # Cache binary assets
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/*.png
+  # Cache images
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  # Cache images
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  # Cache SVGs
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  # Cache WebP images
+  Cache-Control: public, max-age=31536000, immutable
+
+/index.html
+  # Don't cache HTML
+  Cache-Control: public, max-age=0, must-revalidate
+

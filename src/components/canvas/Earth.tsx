@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import Loader from "../Loader";
+import * as THREE from "three";
 
 const Earth = () => {
-  const earth = useGLTF("./earth/scene.gltf");
+  const earth = useGLTF("/earth/scene.gltf");
 
   return (
     <mesh>
@@ -37,9 +39,13 @@ const EarthCanvas = () => {
         far: 200,
         position: [-4, 3, 6],
       }}
+      onCreated={() => {
+        // Enable in-session caching for loaders
+        try { THREE.Cache.enabled = true; } catch {}
+      }}
       gl={{ antialias: false, powerPreference: "high-performance", alpha: true, preserveDrawingBuffer: false }}
     >
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <OrbitControls
           autoRotate={true}
           enableZoom={false}

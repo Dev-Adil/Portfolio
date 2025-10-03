@@ -125,7 +125,7 @@ const Contact = () => {
         className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
       >
         <div ref={ref} className="w-full h-full">
-          <Suspense fallback={null}>{mountEarth ? <EarthCanvas /> : null}</Suspense>
+          {mountEarth ? <EarthCanvas /> : <div className="w-full h-full bg-gradient-to-b from-[#0b0b1e] to-[#050816]" />}
         </div>
       </motion.div>
     </div>
