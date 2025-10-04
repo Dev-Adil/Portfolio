@@ -5,7 +5,6 @@
 Your portfolio uses the following 3D models:
 - `public/earth/scene.gltf` + `scene.bin`
 - `public/planet/scene.gltf` + `scene.bin`
-- `public/desktop_pc/scene.gltf` + `scene.bin` (not currently used)
 
 ## Recommended Tools
 

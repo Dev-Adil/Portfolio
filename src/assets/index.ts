@@ -7,27 +7,23 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-import css from "./tech/css.png";
-import docker from "./tech/docker.png";
-import figma from "./tech/figma.png";
-import git from "./tech/git.png";
-import html from "./tech/html.png";
-import javascript from "./tech/javascript.png";
-import make from "./tech/make.png";
-import mongodb from "./tech/mongodb.png";
-import n8n from "./tech/n8n.png";
-import nodejs from "./tech/nodejs.png";
-import reactjs from "./tech/reactjs.png";
-import redux from "./tech/redux.png";
-import swift from "./tech/swift.png";
-import tailwind from "./tech/tailwind.png";
-import typescript from "./tech/typescript.png";
-import threejs from "./tech/threejs.svg";
+import css from "./tech/css.webp";
+import docker from "./tech/docker.webp";
+import git from "./tech/git.webp";
+import html from "./tech/html.webp";
+import javascript from "./tech/javascript.webp";
+import make from "./tech/make.webp";
+import n8n from "./tech/n8n.webp";
+import nodejs from "./tech/nodejs.webp";
+import reactjs from "./tech/reactjs.webp";
+import swift from "./tech/swift.webp";
+import tailwind from "./tech/tailwind.webp";
+import typescript from "./tech/typescript.webp";
 
-import caci from "./company/caci.png";
-import gdit from "./company/gdit.png";
-import boozallen from "./company/boozallen.png";
-import xpectsolutions from "./company/xpectsolutions.png";
+import caci from "./company/caci.webp";
+import gdit from "./company/gdit.webp";
+import boozallen from "./company/boozallen.webp";
+import xpectsolutions from "./company/xpectsolutions.webp";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
@@ -44,19 +40,15 @@ export {
   close,
   css,
   docker,
-  figma,
   git,
   html,
   javascript,
-  mongodb,
   make,
   n8n,
   nodejs,
   reactjs,
-  redux,
   tailwind,
   typescript,
-  threejs,
   caci,
   gdit,
   boozallen,
