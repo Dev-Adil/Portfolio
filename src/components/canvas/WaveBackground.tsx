@@ -1,15 +1,17 @@
 import { useRef, useMemo, memo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { getDeviceInfo, prefersReducedMotion, getCanvasDPR, shouldUseAntialiasing } from "../../utils/performance";
 
 interface WaveLineProps {
   index: number;
   totalLines: number;
+  pointsCount: number;
+  reduceMotion: boolean;
 }
 
-const WaveLine = memo(({ index, totalLines }: WaveLineProps) => {
+const WaveLine = memo(({ index, totalLines, pointsCount, reduceMotion }: WaveLineProps) => {
   const lineRef = useRef<THREE.Line>(null);
-  const pointsCount = 150;
 
   // Reusable color objects (created once, reused per frame)
   const colors = useMemo(() => ({
@@ -42,7 +44,7 @@ const WaveLine = memo(({ index, totalLines }: WaveLineProps) => {
   const depthFactor = useMemo(() => 1 - (index / totalLines) * 0.3, [index, totalLines]);
 
   useFrame((state) => {
-    if (lineRef.current) {
+    if (lineRef.current && !reduceMotion) {
       const positions = lineRef.current.geometry.attributes.position;
       const time = state.clock.elapsedTime * 0.6;
       const colorTime = state.clock.elapsedTime * 0.15;
@@ -82,9 +84,13 @@ const WaveLine = memo(({ index, totalLines }: WaveLineProps) => {
 
 WaveLine.displayName = 'WaveLine';
 
-const WaveLines = () => {
-  const totalLines = 30;
+interface WaveLinesProps {
+  totalLines: number;
+  pointsCount: number;
+  reduceMotion: boolean;
+}
 
+const WaveLines = ({ totalLines, pointsCount, reduceMotion }: WaveLinesProps) => {
   return (
     <>
       {Array.from({ length: totalLines }).map((_, index) => (
@@ -92,6 +98,8 @@ const WaveLines = () => {
           key={index} 
           index={index}
           totalLines={totalLines}
+          pointsCount={pointsCount}
+          reduceMotion={reduceMotion}
         />
       ))}
     </>
@@ -99,8 +107,27 @@ const WaveLines = () => {
 };
 
 const WaveBackground = () => {
+  const deviceInfo = useMemo(() => getDeviceInfo(), []);
+  const reduceMotion = useMemo(() => prefersReducedMotion(), []);
+  const dpr = useMemo(() => getCanvasDPR(), []);
+  const antialias = useMemo(() => shouldUseAntialiasing(), []);
+  
+  // Reduce complexity on mobile/low-end devices
+  const totalLines = useMemo(() => {
+    if (deviceInfo.isLowEnd) return 15;
+    if (deviceInfo.isMobile) return 20;
+    return 30;
+  }, [deviceInfo.isLowEnd, deviceInfo.isMobile]);
+  
+  const pointsCount = useMemo(() => {
+    if (deviceInfo.isLowEnd) return 80;
+    if (deviceInfo.isMobile) return 100;
+    return 150;
+  }, [deviceInfo.isLowEnd, deviceInfo.isMobile]);
+
   return (
     <Canvas
+      dpr={dpr}
       camera={{ position: [0, 0, 10], fov: 75 }}
       style={{
         position: "absolute",
@@ -111,12 +138,16 @@ const WaveBackground = () => {
         zIndex: 0,
       }}
       gl={{ 
-        antialias: true,
+        antialias,
         alpha: true,
-        powerPreference: "high-performance"
+        powerPreference: deviceInfo.isMobile ? "low-power" : "high-performance"
       }}
     >
-      <WaveLines />
+      <WaveLines 
+        totalLines={totalLines} 
+        pointsCount={pointsCount}
+        reduceMotion={reduceMotion}
+      />
     </Canvas>
   );
 };

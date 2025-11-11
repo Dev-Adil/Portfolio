@@ -11,6 +11,37 @@
   color-scheme: dark;
 }
 
+/* Performance optimizations */
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Prevent layout shift - reserve space for images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Optimize font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;

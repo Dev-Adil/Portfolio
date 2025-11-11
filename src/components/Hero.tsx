@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
+import { useMemo } from "react";
+import { prefersReducedMotion } from "../utils/performance";
 
 import { styles } from "../style";
 // removed ComputersCanvas per request
 
 const Hero = () => {
+  const reduceMotion = useMemo(() => prefersReducedMotion(), []);
+
   return (
     <section className="relative w-full h-screen mx-auto">
       <div
@@ -28,10 +32,10 @@ const Hero = () => {
       {/* 3D computer model removed */}
 
       <div className="absolute sm:bottom-0 bottom-24 w-full flex justify-center items-center">
-        <a href="#about">
+        <a href="#about" aria-label="Scroll to About section">
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
             <motion.div
-              animate={{ y: [0, 24, 0] }}
+              animate={reduceMotion ? {} : { y: [0, 24, 0] }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,

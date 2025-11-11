@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   Decal,
@@ -9,21 +9,31 @@ import {
 } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
+import { getCanvasDPR, shouldUseAntialiasing, prefersReducedMotion, getDeviceInfo } from "../../utils/performance";
 
 type BallProps = { imgUrl: string };
-const Ball = (props: BallProps) => {
-  const [decal] = useTexture([props.imgUrl]);
+const Ball = ({ imgUrl }: BallProps) => {
+  const [decal] = useTexture([imgUrl]);
+  const deviceInfo = useMemo(() => getDeviceInfo(), []);
+  const reduceMotion = useMemo(() => prefersReducedMotion(), []);
+  
+  // Reduce animation intensity on low-end devices or when motion is reduced
+  const floatSpeed = reduceMotion ? 0 : (deviceInfo.isLowEnd ? 1 : 1.75);
+  const rotationIntensity = reduceMotion ? 0 : (deviceInfo.isLowEnd ? 0.5 : 1);
+  const floatIntensity = reduceMotion ? 0 : (deviceInfo.isLowEnd ? 1 : 2);
+  const useShadows = !deviceInfo.isLowEnd;
 
   return (
-    <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1.5}>
+    <Float speed={floatSpeed} rotationIntensity={rotationIntensity} floatIntensity={floatIntensity}>
       <ambientLight intensity={1} />
       <directionalLight position={[0, 0, 0.05]} />
-      <mesh scale={2.75}>
-        <octahedronGeometry args={[1, 1]} />
+      <mesh castShadow={useShadows} receiveShadow={useShadows} scale={2.75}>
+        <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
           color="#fff8eb"
           polygonOffset
           polygonOffsetFactor={-5}
+          flatShading
         />
         <Decal
           position={[0, 0, 1]}
@@ -38,16 +48,27 @@ const Ball = (props: BallProps) => {
 
 type BallCanvasProps = { icon: string };
 const BallCanvas = ({ icon }: BallCanvasProps) => {
+  const dpr = useMemo(() => getCanvasDPR(), []);
+  const antialias = useMemo(() => shouldUseAntialiasing(), []);
+  const deviceInfo = useMemo(() => getDeviceInfo(), []);
+  
   return (
     <Canvas
       frameloop="demand"
-      dpr={[1, 1.2]}
-      gl={{ antialias: false, powerPreference: "high-performance", alpha: true, preserveDrawingBuffer: false }}
+      dpr={dpr}
+      gl={{ 
+        antialias, 
+        powerPreference: deviceInfo.isMobile ? "low-power" : "high-performance", 
+        alpha: true, 
+        preserveDrawingBuffer: false 
+      }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false} enablePan={false} />
         <Ball imgUrl={icon} />
       </Suspense>
+
+      <Preload all />
     </Canvas>
   );
 };

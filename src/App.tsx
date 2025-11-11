@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
+import { preloadEarth, preloadBallTextures } from "./three-preload";
 
 const Navbar = lazy(() => import("./components/Navbar"));
 const Hero = lazy(() => import("./components/Hero"));
@@ -13,6 +14,18 @@ const WaveBackground = lazy(() => import("./components/canvas/WaveBackground"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
+  // Preload 3D models and textures asynchronously on app start
+  useEffect(() => {
+    // Use setTimeout to defer preloading until after initial render
+    const timer = setTimeout(() => {
+      // Preload Earth 3D model for Contact section
+      preloadEarth();
+      // Preload Ball textures for Tech section
+      preloadBallTextures();
+    }, 1000); // Start preloading after 1 second to not interfere with initial page load
+    
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="relative z-0 bg-primary">
       <Suspense fallback={<div className="text-white p-8">Loading…</div>}>

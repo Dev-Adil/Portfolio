@@ -13,9 +13,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" />
-    <link rel="preload" href="/earth/scene.gltf" as="fetch" crossorigin />
-    <link rel="preload" href="/earth/scene.bin" as="fetch" crossorigin />
+    <!-- Optimized font loading - only load weights we actually use -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" /></noscript>
+    <!-- Prefetch 3D assets (not preload - lower priority) -->
+    <link rel="prefetch" href="/earth/scene.gltf" as="fetch" crossorigin />
+    <link rel="prefetch" href="/earth/scene.bin" as="fetch" crossorigin />
     <title>Adil | Portfolio</title>
   </head>
   <body>

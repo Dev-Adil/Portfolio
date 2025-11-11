@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import Loader from "../Loader";
 import * as THREE from "three";
+import { getCanvasDPR, shouldUseAntialiasing, prefersReducedMotion, getDeviceInfo } from "../../utils/performance";
 
 const Earth = () => {
   const earth = useGLTF("/earth/scene.gltf");
@@ -28,11 +29,16 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
+  const dpr = useMemo(() => getCanvasDPR(), []);
+  const antialias = useMemo(() => shouldUseAntialiasing(), []);
+  const deviceInfo = useMemo(() => getDeviceInfo(), []);
+  const shouldAutoRotate = useMemo(() => !deviceInfo.isLowEnd && !prefersReducedMotion(), [deviceInfo.isLowEnd]);
+  
   return (
     <Canvas
       shadows={false}
       frameloop="demand"
-      dpr={[1, 1.1]}
+      dpr={dpr}
       camera={{
         fov: 60,
         near: 0.1,
@@ -43,11 +49,17 @@ const EarthCanvas = () => {
         // Enable in-session caching for loaders
         try { THREE.Cache.enabled = true; } catch {}
       }}
-      gl={{ antialias: false, powerPreference: "high-performance", alpha: true, preserveDrawingBuffer: false }}
+      gl={{ 
+        antialias, 
+        powerPreference: deviceInfo.isMobile ? "low-power" : "high-performance", 
+        alpha: true, 
+        preserveDrawingBuffer: false 
+      }}
     >
       <Suspense fallback={<Loader />}>
         <OrbitControls
-          autoRotate={true}
+          autoRotate={shouldAutoRotate}
+          autoRotateSpeed={shouldAutoRotate ? 1 : 0}
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
