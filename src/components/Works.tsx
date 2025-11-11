@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import type { Project } from "../constants/projects";
 import { fadeIn, textVariant } from "../utils/motion";
 
-type ProjectCardProps = import("../constants").Project & { index: number };
+type ProjectCardProps = Project & { index: number };
 const ProjectCard = ({ index, name, description, tags, image, source_code_link }: ProjectCardProps) => {
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
@@ -47,7 +47,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
 
         <div className="mt-5">
           <h3 className="text-white text-[24px] font-bold">{name}</h3>
-          <p className="text-secondary text-[14px]mt-2">{description}</p>
+          <p className="text-secondary text-[14px] mt-2">{description}</p>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -63,7 +63,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link }
 };
 
 const Works = () => {
-  const [projects, setProjects] = useState<Project[] | null>(null);
+  const [projects, setProjects] = useState<ReadonlyArray<Project> | null>(null);
   useEffect(() => {
     let isMounted = true;
     import("../constants/projects").then((m) => {

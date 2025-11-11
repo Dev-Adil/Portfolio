@@ -1,3 +1,20 @@
+/**
+ * Higher-Order Component that wraps sections with:
+ * - Framer Motion animations
+ * - Section ID for navigation
+ * - Consistent styling and spacing
+ * - Performance optimizations (content-visibility)
+ * 
+ * @param Component - React component to wrap
+ * @param idName - ID for hash navigation (e.g., "about", "contact")
+ * @returns Memoized wrapped component with animations and section structure
+ * 
+ * @example
+ * ```tsx
+ * export default SectionWrapper(About, "about");
+ * ```
+ */
+
 import { ComponentType } from "react";
 import { motion } from "framer-motion";
 

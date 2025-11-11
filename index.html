@@ -4,22 +4,57 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Adil Ahmad | Portfolio - Full-stack developer and AI consultant" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Adil Ahmad | Senior Software Engineer & AI Architect Portfolio</title>
+    <meta name="title" content="Adil Ahmad | Senior Software Engineer & AI Architect Portfolio" />
+    <meta name="description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications. Specializing in React, TypeScript, Node.js, and modern cloud technologies." />
+    <meta name="keywords" content="software engineer, full-stack developer, AI architect, React developer, TypeScript, Node.js, portfolio, web developer" />
+    <meta name="author" content="Adil Ahmad" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://adil-ahmad.dev/" />
+    <meta property="og:title" content="Adil Ahmad | Senior Software Engineer & AI Architect" />
+    <meta property="og:description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications." />
+    <meta property="og:image" content="https://adil-ahmad.dev/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://adil-ahmad.dev/" />
+    <meta property="twitter:title" content="Adil Ahmad | Senior Software Engineer & AI Architect" />
+    <meta property="twitter:description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications." />
+    <meta property="twitter:image" content="https://adil-ahmad.dev/og-image.jpg" />
+    
+    <!-- Additional Meta Tags -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://randomuser.me; connect-src 'self' ws: https://api.emailjs.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; upgrade-insecure-requests" />
+    <meta name="theme-color" content="#050816" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Security Headers -->
+    <!-- CSP: frame-ancestors only works in HTTP headers, not meta tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://randomuser.me; connect-src 'self' ws: https://api.emailjs.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
     <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()" />
+    
+    <!-- Performance: Resource Hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <!-- Optimized font loading - only load weights we actually use -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" /></noscript>
+    
+    <!-- Optimized font loading - load synchronously to avoid CSP violation -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
+    
     <!-- Prefetch 3D assets (not preload - lower priority) -->
     <link rel="prefetch" href="/earth/scene.gltf" as="fetch" crossorigin />
     <link rel="prefetch" href="/earth/scene.bin" as="fetch" crossorigin />
-    <title>Adil | Portfolio</title>
+    
+    <!-- Module Preload for faster initial load -->
+    <link rel="modulepreload" href="/src/main.tsx" />
   </head>
   <body>
     <div id="root"></div>

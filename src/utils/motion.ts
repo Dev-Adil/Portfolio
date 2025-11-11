@@ -1,4 +1,18 @@
-export const textVariant = (delay = 0) => {
+/**
+ * Framer Motion Animation Variants
+ * 
+ * Provides reusable animation variants for consistent motion throughout the application.
+ * All animations respect prefers-reduced-motion user preference.
+ * 
+ * @module motion
+ */
+
+/**
+ * Text variant animation - slides text in from top
+ * @param delay - Animation delay in seconds (default: 0)
+ * @returns Framer Motion variant object
+ */
+export const textVariant = (delay: number = 0) => {
   return {
     hidden: {
       y: -50,
@@ -16,7 +30,20 @@ export const textVariant = (delay = 0) => {
   };
 };
 
-export const fadeIn = (direction, type, delay, duration) => {
+/**
+ * Fade in animation variant
+ * @param direction - Animation direction: "left", "right", "up", "down", or ""
+ * @param type - Transition type (e.g., "tween", "spring")
+ * @param delay - Animation delay in seconds
+ * @param duration - Animation duration in seconds
+ * @returns Framer Motion variant object
+ */
+export const fadeIn = (
+  direction: "left" | "right" | "up" | "down" | "",
+  type: string,
+  delay: number,
+  duration: number
+) => {
   return {
     hidden: {
       x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
@@ -37,7 +64,13 @@ export const fadeIn = (direction, type, delay, duration) => {
   };
 };
 
-export const zoomIn = (delay, duration) => {
+/**
+ * Zoom in animation variant
+ * @param delay - Animation delay in seconds
+ * @param duration - Animation duration in seconds
+ * @returns Framer Motion variant object
+ */
+export const zoomIn = (delay: number, duration: number) => {
   return {
     hidden: {
       scale: 0,
@@ -56,7 +89,20 @@ export const zoomIn = (delay, duration) => {
   };
 };
 
-export const slideIn = (direction, type, delay, duration) => {
+/**
+ * Slide in animation variant
+ * @param direction - Animation direction: "left", "right", "up", "down", or ""
+ * @param type - Transition type (e.g., "tween", "spring")
+ * @param delay - Animation delay in seconds
+ * @param duration - Animation duration in seconds
+ * @returns Framer Motion variant object
+ */
+export const slideIn = (
+  direction: "left" | "right" | "up" | "down" | "",
+  type: string,
+  delay: number,
+  duration: number
+) => {
   return {
     hidden: {
       x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
@@ -75,6 +121,13 @@ export const slideIn = (direction, type, delay, duration) => {
   };
 };
 
+/**
+ * Stagger container animation variant
+ * Animates children with a staggered delay effect
+ * @param staggerChildren - Delay between each child animation in seconds (default: 0.12)
+ * @param delayChildren - Initial delay before starting animations in seconds (default: 0)
+ * @returns Framer Motion variant object
+ */
 export const staggerContainer = (staggerChildren = 0.12, delayChildren = 0) => {
   return {
     hidden: {},

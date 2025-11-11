@@ -1,3 +1,11 @@
+/**
+ * Experience Section Component
+ * 
+ * Displays work experience timeline with company details and achievements.
+ * 
+ * @component
+ */
+
 import { memo } from "react";
 import {
   VerticalTimeline,
@@ -12,6 +20,11 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
+/**
+ * Experience Card Component
+ * Displays a single work experience entry
+ * @param experience - Experience data object
+ */
 type ExperienceCardProps = { experience: import("../constants").Experience };
 const ExperienceCard = memo(({ experience }: ExperienceCardProps) => (
   <VerticalTimelineElement

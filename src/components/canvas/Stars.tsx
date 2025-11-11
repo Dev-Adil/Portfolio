@@ -1,9 +1,24 @@
+/**
+ * Stars Background Component
+ * 
+ * Renders animated 3D starfield background with adaptive star count.
+ * Respects user's reduced motion preferences.
+ * 
+ * @module canvas/Stars
+ */
+
 import { useRef, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import { inSphere } from "maath/random";
 import { getCanvasDPR, prefersReducedMotion, getDeviceInfo } from "../../utils/performance";
 
+/**
+ * Stars Component
+ * Renders animated starfield particles
+ * @param starCount - Number of stars to render (adaptive based on device)
+ * @param reduceMotion - Whether to disable animation (respects user preference)
+ */
 type StarsProps = { starCount: number; reduceMotion: boolean };
 const Stars = ({ starCount, reduceMotion }: StarsProps) => {
   const ref = useRef<any>();
@@ -35,12 +50,17 @@ const Stars = ({ starCount, reduceMotion }: StarsProps) => {
   );
 };
 
+/**
+ * Stars Canvas Component
+ * Wraps Stars component in a Three.js Canvas with adaptive settings
+ * Optimizes star count based on device capabilities
+ */
 const StarsCanvas = () => {
   const deviceInfo = useMemo(() => getDeviceInfo(), []);
   const reduceMotion = useMemo(() => prefersReducedMotion(), []);
   const dpr = useMemo(() => getCanvasDPR(), []);
   
-  // Reduce star count on mobile/low-end devices
+  // Reduce star count on mobile/low-end devices for better performance
   const starCount = useMemo(() => {
     if (deviceInfo.isLowEnd) return 800;
     if (deviceInfo.isMobile) return 1000;

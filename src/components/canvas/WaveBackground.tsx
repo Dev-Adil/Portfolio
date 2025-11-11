@@ -1,8 +1,25 @@
-import { useRef, useMemo, memo } from "react";
+/**
+ * Wave Background Component
+ * 
+ * Renders animated 3D wave lines background with adaptive complexity.
+ * Optimizes line count and points based on device capabilities.
+ * 
+ * @module canvas/WaveBackground
+ */
+
+import React, { useRef, useMemo, memo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { getDeviceInfo, prefersReducedMotion, getCanvasDPR, shouldUseAntialiasing } from "../../utils/performance";
 
+/**
+ * Wave Line Component
+ * Renders a single animated wave line
+ * @param index - Line index for depth calculation
+ * @param totalLines - Total number of lines (for depth calculation)
+ * @param pointsCount - Number of points per line
+ * @param reduceMotion - Whether to disable animation
+ */
 interface WaveLineProps {
   index: number;
   totalLines: number;
@@ -28,8 +45,11 @@ const WaveLine = memo(({ index, totalLines, pointsCount, reduceMotion }: WaveLin
       const x = (i / pointsCount) * 40 - 20;
       points.push(new THREE.Vector3(x, 0, 0));
     }
-    return new THREE.BufferGeometry().setFromPoints(points);
-  }, []);
+    const geom = new THREE.BufferGeometry().setFromPoints(points);
+    // Ensure geometry is valid and compute bounding sphere to prevent NaN errors
+    geom.computeBoundingSphere();
+    return geom;
+  }, [pointsCount]);
 
   const material = useMemo(() => {
     return new THREE.LineBasicMaterial({
@@ -46,10 +66,14 @@ const WaveLine = memo(({ index, totalLines, pointsCount, reduceMotion }: WaveLin
   useFrame((state) => {
     if (lineRef.current && !reduceMotion) {
       const positions = lineRef.current.geometry.attributes.position;
+      
+      // Safety check: ensure positions exist and are valid
+      if (!positions || positions.count === 0) return;
+      
       const time = state.clock.elapsedTime * 0.6;
       const colorTime = state.clock.elapsedTime * 0.15;
 
-      for (let i = 0; i < pointsCount; i++) {
+      for (let i = 0; i < Math.min(pointsCount, positions.count); i++) {
         const x = (i / pointsCount) * 40 - 20;
         
         const wave1 = Math.sin(x * 0.4 + time) * 1.2;
@@ -57,7 +81,12 @@ const WaveLine = memo(({ index, totalLines, pointsCount, reduceMotion }: WaveLin
         const wave3 = Math.cos(x * 0.3 + time * 0.5) * 0.4;
         
         const waveHeight = wave1 + wave2 + wave3;
-        positions.setY(i, baseY + waveHeight * depthFactor);
+        const yValue = baseY + waveHeight * depthFactor;
+        
+        // Ensure we're setting valid numbers (not NaN)
+        if (isFinite(yValue)) {
+          positions.setY(i, yValue);
+        }
       }
       
       positions.needsUpdate = true;
@@ -79,7 +108,13 @@ const WaveLine = memo(({ index, totalLines, pointsCount, reduceMotion }: WaveLin
     }
   });
 
-  return <line ref={lineRef} geometry={geometry} material={material} />;
+  // Create line object and use primitive to avoid TypeScript conflicts
+  const lineObject = useMemo(() => {
+    const line = new THREE.Line(geometry, material);
+    return line;
+  }, [geometry, material]);
+
+  return <primitive object={lineObject} ref={lineRef as React.Ref<THREE.Line>} />;
 });
 
 WaveLine.displayName = 'WaveLine';
@@ -106,13 +141,18 @@ const WaveLines = ({ totalLines, pointsCount, reduceMotion }: WaveLinesProps) =>
   );
 };
 
+/**
+ * Wave Background Canvas Component
+ * Wraps WaveLines in a Three.js Canvas with adaptive settings
+ * Optimizes complexity based on device capabilities
+ */
 const WaveBackground = () => {
   const deviceInfo = useMemo(() => getDeviceInfo(), []);
   const reduceMotion = useMemo(() => prefersReducedMotion(), []);
   const dpr = useMemo(() => getCanvasDPR(), []);
   const antialias = useMemo(() => shouldUseAntialiasing(), []);
   
-  // Reduce complexity on mobile/low-end devices
+  // Reduce complexity on mobile/low-end devices for better performance
   const totalLines = useMemo(() => {
     if (deviceInfo.isLowEnd) return 15;
     if (deviceInfo.isMobile) return 20;

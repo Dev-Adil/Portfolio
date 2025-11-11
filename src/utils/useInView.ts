@@ -1,3 +1,17 @@
+/**
+ * Custom hook to detect when an element enters the viewport
+ * Uses Intersection Observer API for efficient viewport detection
+ * 
+ * @param options - IntersectionObserver options with optional `once` flag
+ * @returns Object with `ref` to attach to element and `inView` boolean state
+ * 
+ * @example
+ * ```tsx
+ * const { ref, inView } = useInView({ rootMargin: "100px" });
+ * return <div ref={ref}>{inView && <ExpensiveComponent />}</div>;
+ * ```
+ */
+
 import { useEffect, useRef, useState } from "react";
 
 type InViewOptions = IntersectionObserverInit & { once?: boolean };

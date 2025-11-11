@@ -1,3 +1,11 @@
+/**
+ * About Section Component
+ * 
+ * Displays professional overview and service cards with tilt animations.
+ * 
+ * @component
+ */
+
 import { memo } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
@@ -7,6 +15,13 @@ import { services } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 
+/**
+ * Service Card Component
+ * Displays a service with icon and title
+ * @param index - Card index for staggered animation
+ * @param title - Service title
+ * @param icon - Service icon URL
+ */
 type ServiceCardProps = { index: number; title: string; icon: string };
 const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => {
   return (

@@ -1,6 +1,11 @@
 /**
- * Lightweight performance utilities using built-in browser APIs
- * No external dependencies - pure browser detection
+ * Performance Utilities
+ * 
+ * Lightweight performance utilities using built-in browser APIs.
+ * Provides device detection, network analysis, and optimal rendering settings.
+ * No external dependencies - pure browser detection.
+ * 
+ * @module utils/performance
  */
 
 // Cache device info to avoid repeated checks

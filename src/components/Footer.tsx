@@ -1,10 +1,17 @@
+/**
+ * Footer Component
+ * Displays copyright and site information
+ * 
+ * @component
+ */
+
 import { styles } from "../style";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black-200 border-t border-white/10">
+    <footer className="bg-black-200 border-t border-white/10" role="contentinfo">
       <div className={`${styles.paddingX} py-8`}>
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Content */}

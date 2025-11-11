@@ -1,6 +1,16 @@
+/**
+ * Main Application Component
+ * 
+ * Orchestrates lazy-loaded components and manages 3D asset preloading.
+ * All major components are code-split for optimal initial load performance.
+ * 
+ * @component
+ */
+
 import { Suspense, lazy, useEffect } from "react";
 import { preloadEarth, preloadBallTextures } from "./three-preload";
 
+// Lazy load all major components for code splitting
 const Navbar = lazy(() => import("./components/Navbar"));
 const Hero = lazy(() => import("./components/Hero"));
 const About = lazy(() => import("./components/About"));
@@ -15,12 +25,10 @@ const Footer = lazy(() => import("./components/Footer"));
 
 const App = () => {
   // Preload 3D models and textures asynchronously on app start
+  // Deferred to avoid blocking initial render
   useEffect(() => {
-    // Use setTimeout to defer preloading until after initial render
     const timer = setTimeout(() => {
-      // Preload Earth 3D model for Contact section
       preloadEarth();
-      // Preload Ball textures for Tech section
       preloadBallTextures();
     }, 1000); // Start preloading after 1 second to not interfere with initial page load
     

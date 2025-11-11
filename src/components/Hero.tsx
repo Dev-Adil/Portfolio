@@ -1,9 +1,17 @@
+/**
+ * Hero Section Component
+ * 
+ * Main landing section with introduction and scroll indicator.
+ * Respects user's reduced motion preferences.
+ * 
+ * @component
+ */
+
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { prefersReducedMotion } from "../utils/performance";
 
 import { styles } from "../style";
-// removed ComputersCanvas per request
 
 const Hero = () => {
   const reduceMotion = useMemo(() => prefersReducedMotion(), []);
