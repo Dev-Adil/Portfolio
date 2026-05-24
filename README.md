@@ -271,8 +271,8 @@ UNLICENSED - All rights reserved
 ## 👤 Author
 
 **Adil Ahmad**
-- Email: adil@quantonimus.com
-- Portfolio: https://adil-ahmad.dev
+- Github: https://github.com/dev-adil
+- Portfolio: https://adil-ahmad.com
 
 ## 🙏 Acknowledgments
 
