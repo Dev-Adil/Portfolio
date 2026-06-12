@@ -1,20 +1,20 @@
 /**
  * Contact Component
- * 
+ *
  * Displays contact form with Earth 3D model visualization.
  * Includes form validation, error handling, and accessibility features.
- * 
+ *
  * @component
  */
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { styles } from "../style";
-import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
-import { profile } from "../constants";
+import { styles } from "@/style";
+import { SectionWrapper } from "@/hoc";
+import { slideIn } from "@/utils/motion";
+import { profile } from "@/constants";
 import { MailIcon, LinkedInIcon, GitHubIcon } from "./icons";
-import { error as logError } from "../utils/logger";
+import { error as logError } from "@/utils/logger";
 
 interface FormState {
   name: string;
@@ -30,6 +30,7 @@ interface FormErrors {
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
+  const honeypotRef = useRef<HTMLInputElement | null>(null);
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -97,7 +98,15 @@ const Contact = () => {
    */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    // Honeypot: this field is invisible to humans. If it has a value, the submission
+    // is almost certainly a bot — fake a success and never call EmailJS.
+    if (honeypotRef.current?.value) {
+      setForm({ name: "", email: "", message: "" });
+      setSubmitStatus("success");
+      return;
+    }
+
     // Validate form before submission
     if (!validateForm()) {
       return;
@@ -109,56 +118,56 @@ const Contact = () => {
     try {
       // Dynamically import emailjs to reduce initial bundle size
       const { default: emailjs } = await import("@emailjs/browser");
-      
+
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-      
+
       if (!serviceId || !templateId || !publicKey) {
         throw new Error("Email service not configured");
       }
 
-      const sanitize = (s: string) =>
-        s.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").trim();
-
+      // EmailJS sends these values into an email template (not rendered as HTML in the
+      // app), so the right defense is origin-locking the EmailJS service + the honeypot
+      // above — not regex "sanitizing". Just trim whitespace.
       await emailjs.send(
         serviceId,
         templateId,
         {
-          from_name: sanitize(form.name),
+          from_name: form.name.trim(),
           to_name: "Adil",
-          from_email: sanitize(form.email),
+          from_email: form.email.trim(),
           to_email: "adilahmad28@gmail.com",
-          message: sanitize(form.message),
+          message: form.message.trim(),
         },
-        publicKey
+        publicKey,
       );
 
       setForm({ name: "", email: "", message: "" });
       setSubmitStatus("success");
-      
+
       // Clear any existing timeout before setting a new one
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      
+
       // Reset success message after 5 seconds
       timeoutRef.current = setTimeout(() => {
         setSubmitStatus("idle");
         timeoutRef.current = null;
       }, 5000);
     } catch (err) {
-      logError("Failed to send contact form", err, { 
+      logError("Failed to send contact form", err, {
         context: "Contact",
-        form: { name: form.name, email: form.email } 
+        form: { name: form.name, email: form.email },
       });
       setSubmitStatus("error");
-      
+
       // Clear any existing timeout before setting a new one
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      
+
       // Reset error message after 5 seconds
       timeoutRef.current = setTimeout(() => {
         setSubmitStatus("idle");
@@ -188,11 +197,24 @@ const Contact = () => {
         <p className={styles.sectionSubText}>Get in touch</p>
         <p className={styles.sectionHeadText}>Contact.</p>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
-        >
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
+          {/* Honeypot — off-screen and hidden from assistive tech; bots that fill it
+              are silently dropped in handleSubmit. */}
+          <div
+            className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden"
+            aria-hidden="true"
+          >
+            <label>
+              Company
+              <input
+                ref={honeypotRef}
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </label>
+          </div>
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Name</span>
             <input
@@ -267,10 +289,11 @@ const Contact = () => {
               ✓ Message sent successfully! I'll get back to you soon.
             </div>
           )}
-          
+
           {submitStatus === "error" && (
             <div className="bg-red-500/20 border border-red-500/50 text-red-400 py-3 px-4 rounded-lg text-sm">
-              ✗ Something went wrong. Please try again or contact me directly at adilahmad28@gmail.com
+              ✗ Something went wrong. Please try again or contact me directly at
+              adilahmad28@gmail.com
             </div>
           )}
 
@@ -298,8 +321,7 @@ const Contact = () => {
             Let&rsquo;s <span className="gradient-text">connect.</span>
           </h3>
           <p className="text-secondary text-[15px] mt-3 leading-relaxed max-w-sm">
-            Open to Senior / Staff engineering roles. Based in {profile.location} · U.S.
-            Citizen.
+            Open to Senior / Staff engineering roles. Based in {profile.location} · U.S. Citizen.
           </p>
 
           <div className="mt-7 flex flex-col gap-3">
@@ -307,7 +329,7 @@ const Contact = () => {
               href={`mailto:${profile.email}`}
               className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
             >
-              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-accent/50 transition-all">
                 <MailIcon className="w-5 h-5" />
               </span>
               <span className="text-[15px] break-all">{profile.email}</span>
@@ -318,7 +340,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
             >
-              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-accent/50 transition-all">
                 <LinkedInIcon className="w-5 h-5" />
               </span>
               <span className="text-[15px]">LinkedIn</span>
@@ -329,7 +351,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
             >
-              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-accent/50 transition-all">
                 <GitHubIcon className="w-5 h-5" />
               </span>
               <span className="text-[15px]">GitHub</span>

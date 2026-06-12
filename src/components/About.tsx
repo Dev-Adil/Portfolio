@@ -10,10 +10,10 @@ import { memo } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
-import { styles } from "../style";
-import { services } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
-import { SectionWrapper } from "../hoc";
+import { styles } from "@/style";
+import { services } from "@/constants";
+import { fadeIn, textVariant } from "@/utils/motion";
+import { SectionWrapper } from "@/hoc";
 
 type ServiceCardProps = { index: number; title: string; icon: string };
 const ServiceCard = memo(({ index, title, icon }: ServiceCardProps) => {
@@ -56,13 +56,13 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I&rsquo;m a senior frontend and mobile engineer with {currentYear - 2016} years owning
-        web and mobile applications end-to-end across the SDLC. At Xpect Solutions I set
-        technical direction for a cross-platform React / React Native ecosystem serving
-        ~50,000 users, led a legacy-platform migration that cut delivery time an estimated 3x,
-        and raised the team&rsquo;s quality bar through code-review standards and mentorship. I
-        care about performance-focused UX architecture &mdash; virtualization, caching, lazy
-        loading &mdash; and pragmatic build-vs-buy tradeoffs.
+        I&rsquo;m a senior frontend and mobile engineer with {currentYear - 2016} years owning web
+        and mobile applications end-to-end across the SDLC. At Xpect Solutions I set technical
+        direction for a cross-platform React / React Native ecosystem serving ~50,000 users, led a
+        legacy-platform migration that cut delivery time an estimated 3x, and raised the
+        team&rsquo;s quality bar through code-review standards and mentorship. I care about
+        performance-focused UX architecture &mdash; virtualization, caching, lazy loading &mdash;
+        and pragmatic build-vs-buy tradeoffs.
       </motion.p>
 
       <div className="mt-16 flex flex-wrap gap-10 justify-center">

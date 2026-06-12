@@ -1,17 +1,17 @@
 /**
  * Navigation Bar Component
- * 
+ *
  * Provides main site navigation with responsive mobile menu.
  * Includes smooth scrolling, active state management, and accessibility features.
- * 
+ *
  * @component
  */
 
 import React, { useEffect, useState } from "react";
 
-import { styles } from "../style";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { styles } from "@/style";
+import { navLinks } from "@/constants";
+import { logo, menu, close } from "@/assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -25,7 +25,7 @@ const Navbar = () => {
         ([entry]) => {
           if (entry.isIntersecting) setActive(link.title);
         },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
       );
       obs.observe(el);
       return obs;
@@ -52,21 +52,33 @@ const Navbar = () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <img src={logo} alt="logo" loading="eager" decoding="async" width="36" height="36" className="w-9 h-9 object-contain" />
+          <img
+            src={logo}
+            alt="logo"
+            loading="eager"
+            decoding="async"
+            width="36"
+            height="36"
+            className="w-9 h-9 object-contain"
+          />
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
             Adil Ahmad
             {/*&nbsp;
             <span className="sm:block hidden">| CEO of Quantonimus</span>*/}
           </p>
         </a>
-        <ul className="list-none hidden sm:flex flex-row gap-10" role="navigation" aria-label="Main navigation">
+        <ul
+          className="list-none hidden sm:flex flex-row gap-10"
+          role="navigation"
+          aria-label="Main navigation"
+        >
           {navLinks.map((link) => (
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
                 className={`${
-                  active === link.title ? "text-[#915eff] after:scale-x-100" : "text-white"
-                } relative hover:text-[#915eff] text-[18px] font-medium cursor-pointer transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#915eff] after:transition-transform after:duration-300 hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-primary rounded`}
+                  active === link.title ? "text-accent after:scale-x-100" : "text-white"
+                } relative hover:text-accent text-[18px] font-medium cursor-pointer transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary rounded`}
                 onClick={() => {
                   setActive(link.title);
                 }}
@@ -108,7 +120,7 @@ const Navbar = () => {
                     href={`#${link.id}`}
                     className={`${
                       active === link.title ? "text-white" : "text-secondary"
-                    } font-poppins font-medium cursor-pointer text-[16px] transition-colors focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-tertiary rounded`}
+                    } font-poppins font-medium cursor-pointer text-[16px] transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-tertiary rounded`}
                     onClick={() => {
                       setToggle(false);
                       setActive(link.title);

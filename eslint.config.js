@@ -7,7 +7,7 @@ import tsParser from '@typescript-eslint/parser'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 
 export default [
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'coverage'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -63,8 +63,10 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      // TypeScript handles undefined identifiers (incl. DOM/TS types); no-undef gives false positives.
+      // TypeScript handles undefined identifiers (incl. DOM/TS types); the base rules give
+      // false positives on type-only params and ambient types, so defer to typescript-eslint.
       'no-undef': 'off',
+      'no-unused-vars': 'off',
       'react/no-unescaped-entities': 'off',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
     },

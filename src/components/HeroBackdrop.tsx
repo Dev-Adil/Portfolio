@@ -10,7 +10,7 @@
  */
 
 import { useEffect, useRef } from "react";
-import { prefersReducedMotion } from "../utils/performance";
+import { prefersReducedMotion } from "@/utils/performance";
 
 type Point = { x: number; y: number; vx: number; vy: number };
 
@@ -132,10 +132,9 @@ const HeroBackdrop = () => {
     frame(); // initial paint (single static frame when reduced motion)
     start();
 
-    const io = new IntersectionObserver(
-      ([entry]) => (entry.isIntersecting ? start() : stop()),
-      { threshold: 0 }
-    );
+    const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()), {
+      threshold: 0,
+    });
     io.observe(canvas);
 
     const onMove = (e: PointerEvent) => {

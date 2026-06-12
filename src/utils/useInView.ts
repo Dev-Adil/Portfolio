@@ -1,10 +1,10 @@
 /**
  * Custom hook to detect when an element enters the viewport
  * Uses Intersection Observer API for efficient viewport detection
- * 
+ *
  * @param options - IntersectionObserver options with optional `once` flag
  * @returns Object with `ref` to attach to element and `inView` boolean state
- * 
+ *
  * @example
  * ```tsx
  * const { ref, inView } = useInView({ rootMargin: "100px" });
@@ -45,7 +45,7 @@ export const useInView = (options?: InViewOptions) => {
         root: options?.root || null,
         rootMargin: options?.rootMargin ?? "200px",
         threshold: options?.threshold ?? 0.01,
-      }
+      },
     );
 
     observer.observe(node);
@@ -57,5 +57,3 @@ export const useInView = (options?: InViewOptions) => {
 
   return { ref: targetRef, inView } as const;
 };
-
-

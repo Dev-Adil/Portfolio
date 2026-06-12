@@ -1,9 +1,9 @@
 /**
  * Error Boundary Component
- * 
+ *
  * Catches React component errors and displays a fallback UI.
  * Prevents entire app from crashing due to component errors.
- * 
+ *
  * @example
  * ```tsx
  * <ErrorBoundary fallback={<CustomErrorUI />}>
@@ -12,7 +12,8 @@
  * ```
  */
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from "react";
+import { error as logError } from "../utils/logger";
 
 interface Props {
   children?: ReactNode;
@@ -41,16 +42,12 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Log error for monitoring (in production, send to error tracking service)
-    if (import.meta.env.PROD) {
-      // Production: Send to error tracking service (e.g., Sentry, LogRocket)
-      console.error('Error caught by boundary:', error, errorInfo);
-    } else {
-      // Development: Log with full details
-      console.error('Error caught by boundary:', error);
-      console.error('Error info:', errorInfo);
-      console.error('Error stack:', error.stack);
-    }
+    // Logs in development. In production this is an intentional no-op placeholder —
+    // wire a real error reporter (e.g. Sentry) here if/when one is added.
+    logError("Uncaught render error", error, {
+      context: "ErrorBoundary",
+      componentStack: errorInfo.componentStack,
+    });
   }
 
   handleReset = (): void => {
@@ -75,7 +72,7 @@ class ErrorBoundary extends Component<Props, State> {
             </p>
             <button
               onClick={this.handleReset}
-              className="bg-[#915eff] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#7c3aed] transition-colors"
+              className="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:bg-[#7c3aed] transition-colors"
             >
               Try Again
             </button>
@@ -95,4 +92,3 @@ class ErrorBoundary extends Component<Props, State> {
 }
 
 export default ErrorBoundary;
-

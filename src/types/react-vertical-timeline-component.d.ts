@@ -1,5 +1,5 @@
-declare module 'react-vertical-timeline-component' {
-  import type { ComponentType, ReactNode } from 'react';
+declare module "react-vertical-timeline-component" {
+  import type { ComponentType, ReactNode } from "react";
 
   export const VerticalTimeline: ComponentType<{
     animate?: boolean;
@@ -11,5 +11,3 @@ declare module 'react-vertical-timeline-component' {
 
   export default {};
 }
-
-

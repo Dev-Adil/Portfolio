@@ -1,28 +1,19 @@
 /**
  * Application Entry Point
- * 
- * Initializes React application with error boundary and suspense handling.
- * Includes font loading monitoring and root element validation.
+ *
+ * Validates the root element and mounts the app inside an error boundary
+ * and a Suspense fallback (sections are lazy-loaded in App).
  */
 
-import { StrictMode, Suspense } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App'
-import ErrorBoundary from './components/ErrorBoundary'
+import { StrictMode, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-// Load fonts asynchronously after initial render (CSP-compliant)
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(() => {
-    // Fonts loaded, no action needed
-  }).catch(() => {
-    // Font loading failed, fallback handled by CSS
-  });
-}
-
-const rootElement = document.getElementById('root')
+const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error('Root element not found')
+  throw new Error("Root element not found");
 }
 
 createRoot(rootElement).render(
@@ -33,5 +24,4 @@ createRoot(rootElement).render(
       </Suspense>
     </ErrorBoundary>
   </StrictMode>,
-)
-
+);

@@ -1,4 +1,4 @@
-import { web, mobile, backend, xpectsolutions, boozallen, gdit, caci } from "../assets";
+import { web, mobile, backend, xpectsolutions, boozallen, gdit, caci } from "@/assets";
 
 export type NavLink = { id: string; title: string };
 export const navLinks: ReadonlyArray<NavLink> = [
@@ -63,14 +63,24 @@ export const skillGroups: ReadonlyArray<SkillGroup> = [
   },
   {
     title: "Cloud & Tooling",
-    items: ["AWS", "PowerShell", "Crashlytics / Analytics", "GitHub / GitLab", "Jira", "Confluence"],
+    items: [
+      "AWS",
+      "PowerShell",
+      "Crashlytics / Analytics",
+      "GitHub / GitLab",
+      "Jira",
+      "Confluence",
+    ],
   },
 ];
 
 export type Credential = { title: string; detail: string };
 export const education: ReadonlyArray<Credential> = [
   { title: "M.S., Applied Information Technology", detail: "George Mason University · 2016–2019" },
-  { title: "B.S., Applied Information Technology / Business", detail: "George Mason University · 2012–2015" },
+  {
+    title: "B.S., Applied Information Technology / Business",
+    detail: "George Mason University · 2012–2015",
+  },
 ];
 
 export type Certification = {

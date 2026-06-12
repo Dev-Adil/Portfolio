@@ -1,9 +1,9 @@
 /**
  * Framer Motion Animation Variants
- * 
+ *
  * Provides reusable animation variants for consistent motion throughout the application.
  * All animations respect prefers-reduced-motion user preference.
- * 
+ *
  * @module motion
  */
 
@@ -42,7 +42,7 @@ export const fadeIn = (
   direction: "left" | "right" | "up" | "down" | "",
   type: string,
   delay: number,
-  duration: number
+  duration: number,
 ) => {
   return {
     hidden: {
@@ -101,7 +101,7 @@ export const slideIn = (
   direction: "left" | "right" | "up" | "down" | "",
   type: string,
   delay: number,
-  duration: number
+  duration: number,
 ) => {
   return {
     hidden: {

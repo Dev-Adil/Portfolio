@@ -9,8 +9,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "../utils/useInView";
-import { prefersReducedMotion } from "../utils/performance";
+import { useInView } from "@/utils/useInView";
+import { prefersReducedMotion } from "@/utils/performance";
 
 type Stat = { value: number; prefix?: string; suffix?: string; label: string };
 
