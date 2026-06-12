@@ -11,10 +11,9 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../style";
 import { SectionWrapper } from "../hoc";
-import { Suspense } from "react";
-import { EarthCanvas } from "./canvas";
-import { useInView } from "../utils/useInView";
 import { slideIn } from "../utils/motion";
+import { profile } from "../constants";
+import { MailIcon, LinkedInIcon, GitHubIcon } from "./icons";
 import { error as logError } from "../utils/logger";
 
 interface FormState {
@@ -39,7 +38,6 @@ const Contact = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-  const [mountEarth, setMountEarth] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   /**
@@ -85,18 +83,10 @@ const Contact = () => {
    */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    
-    // Sanitize input (basic XSS prevention)
-    const sanitizedValue = value.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    
-    setForm({ ...form, [name]: sanitizedValue });
-    
-    // Clear error when user starts typing
+    setForm({ ...form, [name]: value });
     if (errors[name as keyof FormErrors]) {
       setErrors({ ...errors, [name]: undefined });
     }
-    
-    // Reset submit status
     if (submitStatus !== "idle") {
       setSubmitStatus("idle");
     }
@@ -128,15 +118,18 @@ const Contact = () => {
         throw new Error("Email service not configured");
       }
 
+      const sanitize = (s: string) =>
+        s.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").trim();
+
       await emailjs.send(
         serviceId,
         templateId,
         {
-          from_name: form.name.trim(),
+          from_name: sanitize(form.name),
           to_name: "Adil",
-          from_email: form.email.trim(),
-          to_email: "adil@quantonimus.com",
-          message: form.message.trim(),
+          from_email: sanitize(form.email),
+          to_email: "adilahmad28@gmail.com",
+          message: sanitize(form.message),
         },
         publicKey
       );
@@ -176,12 +169,6 @@ const Contact = () => {
     }
   };
 
-  const { ref, inView } = useInView({ rootMargin: "1000px" });
-  useEffect(() => {
-    if (!inView) return;
-    setMountEarth(true);
-  }, [inView]);
-
   // Cleanup timeout on unmount to prevent memory leaks
   useEffect(() => {
     return () => {
@@ -196,7 +183,7 @@ const Contact = () => {
       <motion.div
         variants={slideIn("left", "tween", 0.1, 0.55)}
         style={{ willChange: "transform, opacity" }}
-        className="flex-[.75] bg-black-100 p-8 rounded-2xl"
+        className="flex-[1.2] bg-black-100 p-8 rounded-2xl"
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <p className={styles.sectionHeadText}>Contact.</p>
@@ -283,7 +270,7 @@ const Contact = () => {
           
           {submitStatus === "error" && (
             <div className="bg-red-500/20 border border-red-500/50 text-red-400 py-3 px-4 rounded-lg text-sm">
-              ✗ Something went wrong. Please try again or contact me directly at adil@quantonimus.com
+              ✗ Something went wrong. Please try again or contact me directly at adilahmad28@gmail.com
             </div>
           )}
 
@@ -300,10 +287,54 @@ const Contact = () => {
 
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
-        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+        className="gradient-border xl:flex-[.8] rounded-2xl p-8 flex flex-col justify-center gap-6 relative overflow-hidden"
       >
-        <div ref={ref} className="w-full h-full">
-          {mountEarth ? <EarthCanvas /> : <div className="w-full h-full bg-gradient-to-b from-[#0b0b1e] to-[#050816]" />}
+        <span className="contact-glow" aria-hidden="true" />
+        <div className="relative z-10">
+          <p className="text-secondary text-[13px] uppercase tracking-[0.2em]">
+            Open to opportunities
+          </p>
+          <h3 className="text-white text-[28px] font-bold mt-2">
+            Let&rsquo;s <span className="gradient-text">connect.</span>
+          </h3>
+          <p className="text-secondary text-[15px] mt-3 leading-relaxed max-w-sm">
+            Open to Senior / Staff engineering roles. Based in {profile.location} · U.S.
+            Citizen.
+          </p>
+
+          <div className="mt-7 flex flex-col gap-3">
+            <a
+              href={`mailto:${profile.email}`}
+              className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
+            >
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+                <MailIcon className="w-5 h-5" />
+              </span>
+              <span className="text-[15px] break-all">{profile.email}</span>
+            </a>
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
+            >
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+                <LinkedInIcon className="w-5 h-5" />
+              </span>
+              <span className="text-[15px]">LinkedIn</span>
+            </a>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 text-secondary hover:text-white transition-colors w-fit"
+            >
+              <span className="grid place-items-center w-10 h-10 rounded-lg bg-white/5 text-white ring-1 ring-white/10 group-hover:text-[#b79bff] group-hover:ring-[#915eff]/50 transition-all">
+                <GitHubIcon className="w-5 h-5" />
+              </span>
+              <span className="text-[15px]">GitHub</span>
+            </a>
+          </div>
         </div>
       </motion.div>
     </div>

@@ -1,22 +1,20 @@
 {
   "name": "adil-ahmad-portfolio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Production-ready React portfolio with 3D graphics, optimized performance, and enterprise security",
-  "author": "Adil Ahmad <adil@quantonimus.com>",
+  "description": "Adil Ahmad's developer portfolio — React + TypeScript, fast, accessible, and substance-first.",
+  "author": "Adil Ahmad <adilahmad28@gmail.com>",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/portfolio.git"
+    "url": "https://github.com/Dev-Adil/3d_portfolio.git"
   },
   "keywords": [
     "portfolio",
     "react",
     "typescript",
-    "three.js",
     "vite",
-    "3d-graphics",
     "performance",
     "pwa"
   ],
@@ -33,16 +31,11 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@react-three/drei": "^9.116.0",
-    "@react-three/fiber": "^8.17.10",
     "framer-motion": "^11.11.15",
-    "maath": "^0.10.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-tilt": "^1.0.2",
     "react-vertical-timeline-component": "^3.6.0",
-    "simplex-noise": "^4.0.3",
-    "three": "^0.170.0",
     "vite-plugin-pwa": "^1.0.3"
   },
   "devDependencies": {
@@ -50,11 +43,11 @@
     "@types/node": "^24.6.0",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
-    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
+    "baseline-browser-mapping": "^2.10.35",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",

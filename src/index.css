@@ -78,6 +78,103 @@ img {
   background: -webkit-linear-gradient(-90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
 }
 
+/* Gradient text accent (used for stats + heading flourishes) */
+.gradient-text {
+  background: linear-gradient(90deg, #c4b5ff 0%, #915eff 50%, #6aa6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Hero aurora — subtle drifting color glow for depth (GPU-composited) */
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-aurora::before,
+.hero-aurora::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+}
+.hero-aurora::before {
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  left: -8vw;
+  top: -6vw;
+  background: radial-gradient(circle, rgba(145, 94, 255, 0.3), transparent 70%);
+  animation: auroraA 20s ease-in-out infinite alternate;
+}
+.hero-aurora::after {
+  width: 42vw;
+  height: 42vw;
+  max-width: 540px;
+  max-height: 540px;
+  right: -6vw;
+  top: 8vw;
+  background: radial-gradient(circle, rgba(70, 120, 246, 0.2), transparent 70%);
+  animation: auroraB 26s ease-in-out infinite alternate;
+}
+@keyframes auroraA {
+  to {
+    transform: translate3d(7vw, 5vw, 0) scale(1.15);
+  }
+}
+@keyframes auroraB {
+  to {
+    transform: translate3d(-5vw, -4vw, 0) scale(1.1);
+  }
+}
+
+/* Faint dot-grid texture for background depth */
+.texture-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Animated gradient border — premium panel framing (e.g. contact) */
+.gradient-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#100d25, #100d25) padding-box,
+    linear-gradient(
+        120deg,
+        rgba(145, 94, 255, 0.85),
+        rgba(106, 166, 255, 0.6),
+        rgba(0, 206, 168, 0.45),
+        rgba(145, 94, 255, 0.85)
+      )
+      border-box;
+  background-size: 100% 100%, 300% 100%;
+  background-position: 0 0, 0 0;
+  animation: borderflow 12s linear infinite;
+}
+@keyframes borderflow {
+  to {
+    background-position: 0 0, -300% 0;
+  }
+}
+.contact-glow {
+  position: absolute;
+  top: -15%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(145, 94, 255, 0.28), transparent 70%);
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .orange-text-gradient {
   background: #f12711; /* fallback for old browsers */
   background: -webkit-linear-gradient(

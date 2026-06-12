@@ -50,6 +50,7 @@ const ExperienceCard = memo(({ experience }: ExperienceCardProps) => (
       <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
       <p className="text-secondary text-[16px] font-semibold !m-0">
         {experience.company_name}
+        {experience.location ? ` · ${experience.location}` : ""}
       </p>
     </div>
 

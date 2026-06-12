@@ -17,40 +17,20 @@ const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
 
-  // Track active section on scroll with throttling and passive listener
   useEffect(() => {
-    let ticking = false;
-    
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const sections = navLinks.map(link => {
-            const element = document.getElementById(link.id);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              return { id: link.id, top: rect.top, bottom: rect.bottom };
-            }
-            return null;
-          }).filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
-
-          const current = sections.find(
-            section => section.top <= 100 && section.bottom >= 100
-          );
-
-          if (current) {
-            const link = navLinks.find(l => l.id === current.id);
-            if (link) setActive(link.title);
-          }
-          
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    // Use passive listener to prevent scroll blocking warnings
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observers = navLinks.map((link) => {
+      const el = document.getElementById(link.id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(link.title);
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
   return (
@@ -85,8 +65,8 @@ const Navbar = () => {
               <a
                 href={`#${link.id}`}
                 className={`${
-                  active === link.title ? "text-[#915eff]" : "text-white"
-                } hover:text-[#915eff] text-[18px] font-medium cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-primary rounded`}
+                  active === link.title ? "text-[#915eff] after:scale-x-100" : "text-white"
+                } relative hover:text-[#915eff] text-[18px] font-medium cursor-pointer transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#915eff] after:transition-transform after:duration-300 hover:after:scale-x-100 focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-primary rounded`}
                 onClick={() => {
                   setActive(link.title);
                 }}

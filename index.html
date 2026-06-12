@@ -6,28 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
     <!-- Primary Meta Tags -->
-    <title>Adil Ahmad | Senior Software Engineer & AI Architect Portfolio</title>
-    <meta name="title" content="Adil Ahmad | Senior Software Engineer & AI Architect Portfolio" />
-    <meta name="description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications. Specializing in React, TypeScript, Node.js, and modern cloud technologies." />
-    <meta name="keywords" content="software engineer, full-stack developer, AI architect, React developer, TypeScript, Node.js, portfolio, web developer" />
+    <title>Adil Ahmad — Senior Software Engineer</title>
+    <meta name="title" content="Adil Ahmad — Senior Software Engineer" />
+    <meta name="description" content="Adil Ahmad — senior software engineer with 10 years building web & mobile applications in React and React Native, owned end-to-end for ~50,000 users." />
+    <meta name="keywords" content="software engineer, full-stack developer, senior software engineer, React, TypeScript, Node.js, .NET, portfolio" />
     <meta name="author" content="Adil Ahmad" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta name="revisit-after" content="7 days" />
-    
+    <link rel="canonical" href="https://adil-ahmad.com/" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://adil-ahmad.dev/" />
-    <meta property="og:title" content="Adil Ahmad | Senior Software Engineer & AI Architect" />
-    <meta property="og:description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications." />
-    <meta property="og:image" content="https://adil-ahmad.dev/og-image.jpg" />
+    <meta property="og:url" content="https://adil-ahmad.com/" />
+    <meta property="og:title" content="Adil Ahmad — Senior Software Engineer" />
+    <meta property="og:description" content="A decade building web & mobile apps in React & React Native — owned end-to-end for ~50,000 users." />
+    <meta property="og:image" content="https://adil-ahmad.com/og-image.jpg" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://adil-ahmad.dev/" />
-    <meta property="twitter:title" content="Adil Ahmad | Senior Software Engineer & AI Architect" />
-    <meta property="twitter:description" content="Senior Software Engineer with 9+ years of expertise in full-stack development, AI integration, and enterprise-scale applications." />
-    <meta property="twitter:image" content="https://adil-ahmad.dev/og-image.jpg" />
+    <meta property="twitter:url" content="https://adil-ahmad.com/" />
+    <meta property="twitter:title" content="Adil Ahmad — Senior Software Engineer" />
+    <meta property="twitter:description" content="A decade building web & mobile apps in React & React Native — owned end-to-end for ~50,000 users." />
+    <meta property="twitter:image" content="https://adil-ahmad.com/og-image.jpg" />
     
     <!-- Additional Meta Tags -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,7 +38,7 @@
     
     <!-- Security Headers -->
     <!-- CSP: frame-ancestors only works in HTTP headers, not meta tags -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://randomuser.me; connect-src 'self' ws: https://api.emailjs.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
     <meta http-equiv="Permissions-Policy" content="geolocation=(), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()" />
     
     <!-- Performance: Resource Hints -->
@@ -48,13 +49,25 @@
     
     <!-- Optimized font loading - load synchronously to avoid CSP violation -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" />
-    
-    <!-- Prefetch 3D assets (not preload - lower priority) -->
-    <link rel="prefetch" href="/earth/scene.gltf" as="fetch" crossorigin />
-    <link rel="prefetch" href="/earth/scene.bin" as="fetch" crossorigin />
-    
-    <!-- Module Preload for faster initial load -->
-    <link rel="modulepreload" href="/src/main.tsx" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Adil Ahmad",
+        "jobTitle": "Senior Software Engineer",
+        "url": "https://adil-ahmad.com/",
+        "email": "mailto:adilahmad28@gmail.com",
+        "address": { "@type": "PostalAddress", "addressRegion": "VA", "addressCountry": "US" },
+        "knowsAbout": ["React", "React Native", "TypeScript", "Node.js", "Mobile Development", "Web Performance"],
+        "sameAs": [
+          "https://linkedin.com/in/adilahmadgmu",
+          "https://github.com/dev-adil"
+        ],
+        "description": "Senior software engineer with a decade building web and mobile applications in React and React Native."
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

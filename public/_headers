@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://randomuser.me; connect-src 'self' ws: https://api.emailjs.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.emailjs.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; upgrade-insecure-requests
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
@@ -33,14 +33,6 @@
 /*.woff
   # Cache fonts
   Cache-Control: public, max-age=31536000, immutable
-
-/*.gltf
-  # Cache 3D models with stale-while-revalidate for better performance
-  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
-
-/*.bin
-  # Cache binary assets
-  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 
 /*.png
   # Cache images

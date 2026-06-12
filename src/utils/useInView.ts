@@ -35,8 +35,10 @@ export const useInView = (options?: InViewOptions) => {
               observer.disconnect();
               stopped = true;
             }
-            break;
+          } else if (options?.once === false) {
+            setInView(false);
           }
+          break;
         }
       },
       {

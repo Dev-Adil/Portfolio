@@ -1,41 +1,49 @@
 /**
- * Tech Section Component
- * 
- * Displays technology stack with 3D ball visualizations.
- * Uses lazy loading and viewport detection for performance optimization.
- * 
+ * Skills Section Component
+ *
+ * Categorized technical skills (text-based). Replaced the previous
+ * 12 WebGL "tech ball" canvases for clarity and performance.
+ *
  * @component
  */
 
-import { Suspense } from "react";
-import { BallCanvas } from "./canvas";
-import { useInView } from "../utils/useInView";
+import { motion } from "framer-motion";
+import { styles } from "../style";
 import { SectionWrapper } from "../hoc";
-import { technologies } from "../constants";
+import { skillGroups } from "../constants";
+import { fadeIn, textVariant } from "../utils/motion";
 
-const Tech = () => {
-  const { ref, inView } = useInView({ rootMargin: "300px" });
+const Skills = () => {
   return (
-    <div ref={ref} className="flex flex-row flex-wrap justify-center gap-16">
-      {technologies.map((technology, index) => (
-        <div className="w-28 h-28 group" key={technology.name}>
-          <img src={technology.icon} alt={technology.name} loading="lazy" decoding="async" width="112" height="112" className="hidden" />
-          <Suspense fallback={<div className="w-full h-full bg-tertiary rounded-full animate-pulse" />}>
-            {inView ? (
-              <div style={{ width: '112px', height: '112px' }}>
-                <BallCanvas icon={technology.icon} />
-              </div>
-            ) : (
-              <div className="w-full h-full bg-tertiary rounded-full animate-pulse" />
-            )}
-          </Suspense>
-          <p className="text-indigo-300 text-[14px] mt-2 text-center group-hover:text-sky-200 group-hover:font-semibold group-hover:text-[15px]">
-            {technology.name}
-          </p>
-        </div>
-      ))}
-    </div>
+    <>
+      <motion.div variants={textVariant()}>
+        <p className={styles.sectionSubText}>What I work with</p>
+        <h2 className={styles.sectionHeadText}>Skills.</h2>
+      </motion.div>
+
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {skillGroups.map((group, index) => (
+          <motion.div
+            key={group.title}
+            variants={fadeIn("up", "spring", index * 0.1, 0.6)}
+            className="bg-black-100 rounded-2xl p-6 border border-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-[#915eff]/40 hover:shadow-[0_10px_30px_-10px_rgba(145,94,255,0.35)]"
+          >
+            <h3 className="text-white text-[18px] font-bold mb-4">{group.title}</h3>
+            <ul className="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li
+                  key={item}
+                  className="text-[13px] text-secondary bg-tertiary rounded-lg px-3 py-1.5 transition-colors hover:text-white hover:bg-[#915eff]/20"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+    </>
   );
 };
 
-export default SectionWrapper(Tech, "tech");
+export default SectionWrapper(Skills, "skills");

@@ -1,4 +1,4 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import viteCompression from 'vite-plugin-compression'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -8,7 +8,6 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
-    splitVendorChunkPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['logo.svg'],
@@ -25,15 +24,6 @@ export default defineConfig(({ mode }) => ({
       workbox: {
         navigateFallback: '/index.html',
         runtimeCaching: [
-          {
-            urlPattern: ({ url }) => url.pathname.endsWith('.gltf') || url.pathname.endsWith('.bin'),
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'models-cache',
-              expiration: { maxEntries: 10, maxAgeSeconds: 30 * 24 * 60 * 60 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
           {
             urlPattern: ({ request }) => request.destination === 'image',
             handler: 'StaleWhileRevalidate',
@@ -69,13 +59,12 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           react: ['react', 'react-dom'],
-          three: ['three', '@react-three/fiber', '@react-three/drei', 'maath'],
           motion: ['framer-motion'],
         },
       },
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'three', '@react-three/fiber', '@react-three/drei'],
+    include: ['react', 'react-dom'],
   },
 }))

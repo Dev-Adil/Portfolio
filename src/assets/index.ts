@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import backend from "./backend.png";
-import creator from "./creator.png";
 import mobile from "./mobile.png";
 import web from "./web.png";
 import github from "./github.png";
@@ -25,14 +24,9 @@ import gdit from "./company/gdit.webp";
 import boozallen from "./company/boozallen.webp";
 import xpectsolutions from "./company/xpectsolutions.webp";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
-
 export {
   logo,
   backend,
-  creator,
   mobile,
   web,
   github,
@@ -54,7 +48,4 @@ export {
   boozallen,
   xpectsolutions,
   swift,
-  carrent,
-  jobit,
-  tripguide,
 };
