@@ -1,8 +1,8 @@
 /**
  * Contact Component
  *
- * Displays contact form with Earth 3D model visualization.
- * Includes form validation, error handling, and accessibility features.
+ * Displays the contact form plus a "Let's connect" panel with direct links.
+ * Includes form validation, an anti-spam honeypot, and accessibility features.
  *
  * @component
  */

@@ -1,8 +1,8 @@
 # Adil Ahmad — Developer Portfolio
 
-[![CI](https://github.com/Dev-Adil/3d_portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Dev-Adil/3d_portfolio/actions/workflows/ci.yml)
+[![CI](https://github.com/Dev-Adil/Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Dev-Adil/Portfolio/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-All%20rights%20reserved-blue)
-![Lighthouse](https://img.shields.io/badge/Lighthouse-91%20%2F%20100%20%2F%20100%20%2F%20100-success)
+![Lighthouse](https://img.shields.io/badge/Lighthouse%20mobile-90%2B%20%2F%20100%20%2F%20100%20%2F%20100-success)
 
 A fast, accessible, single-page portfolio for a senior software engineer — built to load in
 well under a second on mobile and to read clearly in the ~30 seconds a recruiter actually
@@ -84,8 +84,8 @@ public/                # _headers, .htaccess, robots.txt, sitemap.xml, og-image.
 ## Getting started
 
 ```bash
-git clone https://github.com/Dev-Adil/3d_portfolio.git
-cd 3d_portfolio
+git clone https://github.com/Dev-Adil/Portfolio.git
+cd Portfolio
 npm install
 
 cp .env.example .env     # then fill in your EmailJS keys (optional — only the form needs them)

@@ -1,6 +1,6 @@
 {
   "name": "adil-ahmad-portfolio",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "type": "module",
   "description": "Adil Ahmad's developer portfolio — React + TypeScript, fast, accessible, and substance-first.",
@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Dev-Adil/3d_portfolio.git"
+    "url": "https://github.com/Dev-Adil/Portfolio.git"
   },
   "keywords": [
     "portfolio",

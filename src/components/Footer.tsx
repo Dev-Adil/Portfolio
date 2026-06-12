@@ -54,7 +54,7 @@ const Footer = () => {
 
             {/* Right Side - Built With */}
             <div className="text-secondary text-sm text-center md:text-right">
-              <p>Built with React, Three.js & TypeScript</p>
+              <p>Built with React, TypeScript & Tailwind</p>
             </div>
           </div>
         </div>
